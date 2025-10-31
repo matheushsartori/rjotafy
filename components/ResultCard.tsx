@@ -1,6 +1,7 @@
 "use client";
 
 import { Artist } from "@/lib/constants";
+import { Card } from "reactstrap";
 
 interface ResultCardProps {
   artist: Artist;
@@ -12,56 +13,96 @@ export function ResultCard({ artist, score, maxScore }: ResultCardProps) {
   const percentage = Math.round((score / maxScore) * 100);
 
   return (
-    <div className="group w-full bg-gradient-to-br from-spotify-gray-900 to-spotify-gray-800 rounded-2xl p-6 md:p-8 border-2 border-spotify-gray-700 hover:border-spotify-green transition-all duration-300 hover:shadow-green-glow transform hover:scale-105 animate-scale-in">
-      {/* Header */}
-      <div className="flex items-start justify-between mb-6">
+    <Card className="custom-card position-relative animate-fade-in" style={{ width: "100%" }}>
+      <div className="d-flex justify-content-between align-items-start mb-4">
         <div>
-          <h3 className="text-2xl font-black text-white group-hover:text-spotify-green transition-colors duration-300">
+          <h3 
+            className="mb-1"
+            style={{ 
+              fontSize: "1.25rem", 
+              fontWeight: 700, 
+              color: "#ffffff" 
+            }}
+          >
             {artist.name}
           </h3>
-          <p className="text-spotify-gray-500 text-sm font-semibold mt-1">
+          <p className="text-spotify-gray mb-0" style={{ fontSize: "0.8rem", fontWeight: 500 }}>
             {artist.title}
           </p>
         </div>
-        <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
+        <span style={{ fontSize: "2rem" }}>
           {artist.emoji}
         </span>
       </div>
 
-      {/* Score Bar */}
-      <div className="space-y-3 mb-6">
-        <div className="flex justify-between items-center">
-          <span className="text-sm font-semibold text-spotify-gray-500 uppercase tracking-widest">
+      <div className="mb-3">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <span 
+            className="text-spotify-gray"
+            style={{ 
+              fontSize: "0.7rem", 
+              fontWeight: 500, 
+              textTransform: "uppercase",
+              letterSpacing: "0.15em"
+            }}
+          >
             Compatibilidade
           </span>
-          <span className="text-lg font-black bg-gradient-to-r from-spotify-green to-spotify-green-light bg-clip-text text-transparent">
+          <span 
+            className="text-spotify-green fw-bold"
+            style={{ fontSize: "1rem" }}
+          >
             {percentage}%
           </span>
         </div>
-        <div className="w-full bg-spotify-gray-700 rounded-full h-3 overflow-hidden">
+        <div 
+          className="w-100 rounded-pill overflow-hidden"
+          style={{ 
+            height: "12px",
+            background: "#404040"
+          }}
+        >
           <div
-            className="h-full bg-gradient-to-r from-spotify-green to-spotify-green-light transition-all duration-700 rounded-full"
-            style={{ width: `${percentage}%` }}
+            className="h-100 rounded-pill"
+            style={{
+              width: `${percentage}%`,
+              background: "linear-gradient(90deg, #1DB954 0%, #1ed760 100%)",
+              transition: "width 0.7s ease"
+            }}
           />
         </div>
       </div>
 
-      {/* Characteristics */}
-      <div className="space-y-3">
-        <h4 className="text-xs font-black text-spotify-gray-500 uppercase tracking-widest">
+      <div>
+        <h4 
+          className="text-spotify-gray mb-2"
+          style={{ 
+            fontSize: "0.7rem", 
+            fontWeight: 700, 
+            textTransform: "uppercase",
+            letterSpacing: "0.15em"
+          }}
+        >
           Características
         </h4>
-        <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+        <div className="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
           {artist.characteristics.map((char, idx) => (
             <span
               key={idx}
-              className="px-3 py-1 bg-gradient-to-r from-spotify-gray-800 to-spotify-gray-700 text-spotify-gray-400 text-xs font-semibold rounded-full border border-spotify-gray-600 group-hover:border-spotify-green group-hover:text-spotify-green transition-all duration-300"
+              className="px-3 py-1 rounded-pill"
+              style={{
+                background: "linear-gradient(135deg, #282828 0%, #404040 100%)",
+                border: "1px solid #535353",
+                color: "#b3b3b3",
+                fontSize: "0.75rem",
+                fontWeight: 600
+              }}
             >
               {char}
             </span>
           ))}
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

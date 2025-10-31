@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Container } from "reactstrap";
 
 interface HeaderProps {
   showBack?: boolean;
@@ -9,24 +10,48 @@ interface HeaderProps {
 
 export function Header({ showBack = false, onBack }: HeaderProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black via-black to-transparent">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-2xl">🎵</span>
-          <span className="text-xl font-black text-white group-hover:text-green-500 transition-colors">
-            Rjotafy
-          </span>
-        </Link>
-
-        {showBack && onBack && (
-          <button
-            onClick={onBack}
-            className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+    <header 
+      className="position-fixed top-0 start-0 w-100"
+      style={{
+        zIndex: 1000,
+        background: "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.8) 50%, transparent 100%)",
+        padding: "1rem 0"
+      }}
+    >
+      <Container>
+        <div className="d-flex justify-content-between align-items-center">
+          <Link 
+            href="/" 
+            className="d-flex align-items-center gap-2 text-decoration-none"
           >
-            ← Voltar
-          </button>
-        )}
-      </div>
+            <span style={{ fontSize: "1.5rem" }}>🎵</span>
+            <span 
+              className="text-white fw-bold"
+              style={{ 
+                fontSize: "1.25rem",
+                transition: "color 0.3s ease"
+              }}
+            >
+              Rjotafy
+            </span>
+          </Link>
+
+          {showBack && onBack && (
+            <button
+              onClick={onBack}
+              className="btn btn-link text-decoration-none p-0"
+              style={{ 
+                color: "#b3b3b3",
+                border: "none",
+                background: "none",
+                cursor: "pointer"
+              }}
+            >
+              ← Voltar
+            </button>
+          )}
+        </div>
+      </Container>
     </header>
   );
 }

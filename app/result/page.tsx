@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Container, Row, Col, Button } from "reactstrap";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { ResultCard } from "@/components/ResultCard";
 import { MusicCard } from "@/components/MusicCard";
@@ -14,7 +15,6 @@ export default function ResultPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Get result from session storage
     const storedResult = sessionStorage.getItem("quizResult");
     if (storedResult) {
       setResult(JSON.parse(storedResult));
@@ -26,13 +26,13 @@ export default function ResultPage() {
     return (
       <>
         <AnimatedBackground />
-        <main className="relative min-h-screen flex items-center justify-center">
-          <div className="text-center space-y-6 animate-fade-in">
-            <div className="text-7xl animate-bounce">🎵</div>
-            <p className="text-spotify-gray-500 text-lg font-semibold">
+        <main className="position-relative d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+          <Container className="text-center animate-fade-in">
+            <div className="mb-4 animate-bounce" style={{ fontSize: "5rem" }}>🎵</div>
+            <p className="text-spotify-gray mb-0" style={{ fontSize: "1.125rem", fontWeight: 600 }}>
               Carregando seu resultado...
             </p>
-          </div>
+          </Container>
         </main>
       </>
     );
@@ -42,18 +42,17 @@ export default function ResultPage() {
     return (
       <>
         <AnimatedBackground />
-        <main className="relative min-h-screen flex items-center justify-center">
-          <div className="text-center space-y-6 animate-fade-in">
-            <p className="text-spotify-gray-500 text-lg">
+        <main className="position-relative d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+          <Container className="text-center animate-fade-in">
+            <p className="text-spotify-gray mb-4" style={{ fontSize: "1.125rem" }}>
               Nenhum resultado encontrado
             </p>
-            <Link
-              href="/quiz"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-spotify-green to-spotify-green-light hover:from-spotify-green-light hover:to-spotify-green text-black font-bold rounded-full transition-all duration-300 shadow-spotify-md hover:shadow-green-glow-lg transform hover:scale-105"
-            >
-              Voltar ao Quiz
+            <Link href="/quiz" passHref legacyBehavior>
+              <Button className="custom-btn-primary">
+                Voltar ao Quiz
+              </Button>
             </Link>
-          </div>
+          </Container>
         </main>
       </>
     );
@@ -69,54 +68,80 @@ export default function ResultPage() {
   return (
     <>
       <AnimatedBackground />
-      <main className="relative min-h-screen py-12 md:py-20 px-6">
-        <div className="w-full max-w-5xl mx-auto space-y-16 animate-fade-in">
-          {/* Header */}
-          <div className="text-center space-y-6">
-            <h1 className="text-5xl md:text-7xl font-black text-white">
-              Seu Resultado
-            </h1>
-            <p className="text-xl md:text-2xl text-spotify-gray-500 font-semibold">
-              Descubra qual artista combina com você
-            </p>
-          </div>
+      <main className="position-relative py-5">
+        <Container className="animate-fade-in">
+          <Row className="justify-content-center mb-5">
+            <Col xs={12} className="text-center mb-4">
+              <h1 className="mb-3" style={{ fontSize: "2.25rem", fontWeight: 800, color: "#ffffff" }}>
+                Seu Resultado
+              </h1>
+              <p className="text-spotify-gray mb-0" style={{ fontSize: "1.125rem", fontWeight: 500 }}>
+                Descubra qual artista combina com você
+              </p>
+            </Col>
+          </Row>
 
-          {/* Top Artist Result */}
-          <div className="space-y-8">
-            <div className="text-center space-y-6">
-              <div className="text-8xl md:text-9xl animate-bounce">
+          <Row className="justify-content-center mb-5">
+            <Col xs={12} md={8} className="text-center mb-4">
+              <div className="mb-3 animate-bounce" style={{ fontSize: "4rem" }}>
                 {topArtist.emoji}
               </div>
-              <div>
-                <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-spotify-green to-spotify-green-light bg-clip-text text-transparent mb-3">
-                  {topArtist.name}
-                </h2>
-                <p className="text-2xl md:text-3xl text-spotify-gray-500 font-bold">
-                  {topArtist.title}
+              <h2 
+                className="mb-2 text-spotify-green fw-bold"
+                style={{ fontSize: "2rem" }}
+              >
+                {topArtist.name}
+              </h2>
+              <p className="text-spotify-gray mb-0" style={{ fontSize: "1.125rem", fontWeight: 600 }}>
+                {topArtist.title}
+              </p>
+            </Col>
+          </Row>
+
+          <Row className="justify-content-center mb-5">
+            <Col xs={12} md={8}>
+              <div 
+                className="rounded-3 p-5 text-center"
+                style={{
+                  background: "linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, rgba(29, 185, 84, 0.05) 50%, transparent 100%)",
+                  border: "2px solid rgba(29, 185, 84, 0.5)",
+                  backdropFilter: "blur(10px)"
+                }}
+              >
+                <p 
+                  className="mb-0"
+                  style={{ 
+                    fontSize: "1rem", 
+                    lineHeight: 1.7, 
+                    color: "#ffffff",
+                    fontStyle: "italic",
+                    fontWeight: 500
+                  }}
+                >
+                  "{topArtist.description}"
                 </p>
               </div>
-            </div>
+            </Col>
+          </Row>
 
-            {/* Diagnosis */}
-            <div className="bg-gradient-to-r from-spotify-green/10 via-spotify-green/5 to-transparent border-2 border-spotify-green/50 rounded-2xl p-8 md:p-10 backdrop-blur-sm">
-              <p className="text-lg md:text-xl text-white leading-relaxed text-center font-semibold italic">
-                "{topArtist.description}"
-              </p>
-            </div>
-          </div>
+          <Row className="justify-content-center mb-5">
+            <Col xs={12}>
+              <MusicCard artist={topArtist} />
+            </Col>
+          </Row>
 
-          {/* Music Card */}
-          <MusicCard artist={topArtist} />
+          <Row className="mb-5">
+            <Col xs={12} className="text-center mb-4">
+              <h3 className="mb-0" style={{ fontSize: "1.5rem", fontWeight: 700, color: "#ffffff" }}>
+                Compatibilidade com Todos os Artistas
+              </h3>
+            </Col>
+          </Row>
 
-          {/* All Scores */}
-          <div className="space-y-8">
-            <h3 className="text-3xl md:text-4xl font-black text-white text-center mb-6">
-              Compatibilidade com Todos os Artistas
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {Object.entries(artists).map(([key, artist]) => (
+          <Row className="g-4 mb-5">
+            {Object.entries(artists).map(([key, artist]) => (
+              <Col xs={12} md={4} key={key}>
                 <ResultCard
-                  key={key}
                   artist={artist}
                   score={
                     key === "gaab"
@@ -127,23 +152,29 @@ export default function ResultPage() {
                   }
                   maxScore={maxScore}
                 />
-              ))}
-            </div>
-          </div>
+              </Col>
+            ))}
+          </Row>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-            <button className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-spotify-green to-spotify-green-light hover:from-spotify-green-light hover:to-spotify-green text-black font-black text-base md:text-lg rounded-full transition-all duration-300 shadow-spotify-lg hover:shadow-green-glow-lg transform hover:scale-105 active:scale-95">
-              Compartilhar Resultado
-            </button>
-            <Link
-              href="/quiz"
-              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-spotify-gray-800 to-spotify-gray-700 hover:from-spotify-gray-700 hover:to-spotify-gray-600 text-white font-black text-base md:text-lg rounded-full transition-all duration-300 shadow-spotify-md hover:shadow-spotify-lg transform hover:scale-105 active:scale-95 text-center border-2 border-spotify-gray-600 hover:border-spotify-green"
-            >
-              Fazer Quiz Novamente
-            </Link>
-          </div>
-        </div>
+          <Row className="justify-content-center mb-5">
+            <Col xs={12} md={6} className="d-flex flex-column flex-md-row gap-3 justify-content-center">
+              <Button className="custom-btn-primary">
+                Compartilhar Resultado
+              </Button>
+              <Link href="/quiz" passHref legacyBehavior>
+                <Button 
+                  className="custom-btn-option"
+                  style={{
+                    background: "linear-gradient(135deg, #282828 0%, #404040 100%)",
+                    borderColor: "#535353"
+                  }}
+                >
+                  Fazer Quiz Novamente
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
       </main>
       <Footer />
     </>

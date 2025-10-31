@@ -9,10 +9,22 @@ export function ProgressBar({ current, total }: ProgressBarProps) {
   const percentage = (current / total) * 100;
 
   return (
-    <div className="w-full h-1 bg-gradient-to-r from-spotify-gray-900 to-spotify-gray-800 sticky top-0 z-40">
+    <div 
+      className="position-sticky top-0 w-100"
+      style={{
+        height: "4px",
+        background: "linear-gradient(90deg, #1e1e1e 0%, #282828 100%)",
+        zIndex: 1000
+      }}
+    >
       <div
-        className="h-full bg-gradient-to-r from-spotify-green to-spotify-green-light transition-all duration-500 ease-out shadow-green-glow"
-        style={{ width: `${percentage}%` }}
+        className="h-100"
+        style={{
+          width: `${percentage}%`,
+          background: "linear-gradient(90deg, #1DB954 0%, #1ed760 100%)",
+          transition: "width 0.5s ease-out",
+          boxShadow: "0 0 20px rgba(29, 185, 84, 0.3)"
+        }}
       />
     </div>
   );
