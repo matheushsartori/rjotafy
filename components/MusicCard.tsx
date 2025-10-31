@@ -9,8 +9,8 @@ interface MusicCardProps {
 
 export function MusicCard({ artist }: MusicCardProps) {
   return (
-    <Container className="d-flex justify-content-center py-4">
-      <div className="music-card position-relative" style={{ maxWidth: "600px", width: "100%" }}>
+    <Container className="d-flex justify-content-center py-3">
+      <div className="music-card position-relative" style={{ maxWidth: "500px", width: "100%" }}>
         <div className="text-center mb-3">
           <div className="mb-2 animate-bounce" style={{ fontSize: "3rem" }}>
             🎵

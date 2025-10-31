@@ -213,12 +213,12 @@ body {
 /* Music Card */
 .music-card {
   background: linear-gradient(135deg, rgba(29, 185, 84, 0.2) 0%, rgba(29, 185, 84, 0.1) 50%, transparent 100%);
-  border: 2px solid var(--spotify-green);
-  border-radius: 2rem;
-  padding: 3rem;
+  border: 1px solid var(--spotify-green);
+  border-radius: 1rem;
+  padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(29, 185, 84, 0.3);
+  box-shadow: 0 0 25px rgba(29, 185, 84, 0.2);
 }
 
 .music-card::before {
