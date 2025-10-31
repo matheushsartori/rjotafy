@@ -51,10 +51,10 @@ export function MultipleChoiceQuestion({
               transform: hoveredIndex === index ? "translateY(-3px)" : "translateY(0)",
             }}
           >
-            <span style={{ fontSize: "3rem", flexShrink: 0 }}>
+            <span style={{ fontSize: "2rem", flexShrink: 0 }}>
               {option.emoji}
             </span>
-            <span style={{ fontSize: "1.25rem", fontWeight: 700, textAlign: "left" }}>
+            <span style={{ fontSize: "1rem", fontWeight: 500, textAlign: "left" }}>
               {option.text}
             </span>
           </Button>
