@@ -107,10 +107,10 @@ export default function QuizPage() {
             <MultipleChoiceQuestion
               question={currentQuestion.question}
               options={currentQuestion.options
-                .filter((opt): opt is { text: string; emoji: string } => "emoji" in opt)
+                .filter((opt) => "emoji" in opt)
                 .map((opt) => ({
                   text: opt.text,
-                  emoji: opt.emoji,
+                  emoji: (opt as { text: string; emoji: string; artist: string; points: number }).emoji,
                 }))}
               onSelect={(value) => handleAnswer(value)}
             />
