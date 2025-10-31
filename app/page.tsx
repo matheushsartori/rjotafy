@@ -1,65 +1,78 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <AnimatedBackground />
+      <main className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20">
+        <div className="w-full max-w-3xl text-center space-y-12 animate-fade-in">
+          {/* Logo/Title */}
+          <div className="space-y-6">
+            <div className="flex justify-center mb-4">
+              <div className="text-7xl md:text-8xl animate-bounce">🎵</div>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-black text-white mb-4 bg-gradient-to-r from-white via-spotify-gray-500 to-spotify-green bg-clip-text text-transparent">
+              Rjotafy
+            </h1>
+            <p className="text-2xl md:text-3xl font-bold text-spotify-gray-500">
+              Descubra qual artista combina com você
+            </p>
+          </div>
+
+          {/* Description */}
+          <div className="space-y-6 text-lg md:text-xl leading-relaxed text-spotify-gray-500">
+            <p>
+              Faça um quiz divertido e descubra qual artista do evento{" "}
+              <span className="text-spotify-green font-bold">Legado</span> mais combina com sua personalidade.
+            </p>
+            <p>
+              Ao final, você receberá um diagnóstico personalizado e descobrirá qual música combina mais com você!
+            </p>
+          </div>
+
+          {/* Artists Preview */}
+          <div className="grid grid-cols-3 gap-4 md:gap-6 my-12">
+            {[
+              { emoji: "🎤", name: "Gaab", title: "O Maloqueiro Romântico" },
+              { emoji: "💔", name: "Rodriguinho", title: "O Romântico Clássico" },
+              { emoji: "🌿", name: "Mr. Dan", title: "Good Vibes / Reflexivo" },
+            ].map((artist, idx) => (
+              <div
+                key={idx}
+                className="group p-4 md:p-6 bg-gradient-to-br from-spotify-gray-900 to-spotify-gray-800 rounded-xl border border-spotify-gray-700 hover:border-spotify-green transition-all duration-300 hover:shadow-green-glow"
+              >
+                <div className="text-5xl md:text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {artist.emoji}
+                </div>
+                <h3 className="font-bold text-white text-sm md:text-base mb-1">
+                  {artist.name}
+                </h3>
+                <p className="text-xs md:text-sm text-spotify-gray-500 group-hover:text-spotify-green transition-colors duration-300">
+                  {artist.title}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <Link
+            href="/quiz"
+            className="inline-block mt-8 px-12 md:px-16 py-4 md:py-5 bg-gradient-to-r from-spotify-green to-spotify-green-light hover:from-spotify-green-light hover:to-spotify-green text-black font-black text-lg md:text-xl rounded-full transition-all duration-300 shadow-spotify-lg hover:shadow-green-glow-lg transform hover:scale-105 active:scale-95"
+          >
+            Começar Quiz
+          </Link>
+
+          {/* Footer Text */}
+          <p className="text-sm text-spotify-gray-600 pt-8">
+            ⏱️ Leva apenas 2 minutos
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
